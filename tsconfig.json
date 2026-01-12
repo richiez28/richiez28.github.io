@@ -26,21 +26,31 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
+        "./projects/resume-stack/src/*"
+      ],
+      "@landing/*": [
         "./src/*"
       ],
+      "@resume/*": [
+        "./projects/resume-stack/src/*"
+      ],
+      "@poker/*": [
+        "./projects/poker/src/*"
+      ],
       "#tiptap/*": [
-        "./src/components/tiptap/*"
+        "./projects/resume-stack/src/components/tiptap/*"
       ],
       "#ui/*": [
-        "./src/components/ui/*"
+        "./projects/resume-stack/src/components/ui/*"
       ],
       "#widgets/*": [
-        "./src/components/widgets/*"
+        "./projects/resume-stack/src/components/widgets/*"
       ]
     }
   },
   "include": [
     "src",
+    "projects",
     "vite.config.ts"
   ]
 }
