@@ -1,9 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react-swc'
-import path from 'path'
+import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,11 +16,15 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '#tiptap': path.resolve(__dirname, './src/components/tiptap'),
-      '#ui': path.resolve(__dirname, './src/components/ui'),
-      '#widgets': path.resolve(__dirname, './src/components/widgets'),
+      '@': path.resolve(__dirname, './projects/resume-stack/src'),
+      '@landing': path.resolve(__dirname, './src'),
+      '@resume': path.resolve(__dirname, './projects/resume-stack/src'),
+      '@poker': path.resolve(__dirname, './projects/poker/src'),
+      '#tiptap': path.resolve(__dirname, './projects/resume-stack/src/components/tiptap'),
+      '#ui': path.resolve(__dirname, './projects/resume-stack/src/components/ui'),
+      '#widgets': path.resolve(__dirname, './projects/resume-stack/src/components/widgets'),
     },
+    dedupe: ['react', 'react-dom'],
   },
   css: {
     modules: {
@@ -32,41 +34,15 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    VitePWA({
-      manifest: false,
-      injectRegister: 'script-defer',
-      registerType: 'autoUpdate',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,jpg,png,svg,webp}'],
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => request.destination === 'image',
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'images-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 30 * 24 * 60 * 60,
-              },
-            },
-          },
-        ],
-      },
-    }),
   ],
   build: {
+    chunkSizeWarningLimit: 1600,
+    outDir: "dist",
     rollupOptions: {
-      output: {
-        advancedChunks: {
-          groups: [
-            {
-              name: 'vendor-react',
-              test: /\/react@19|\/react-dom|\/react-router/,
-            },
-            { name: 'vendor-tiptap', test: /\/@tiptap|\/prosemirror/ },
-            { name: 'vendor', test: /\/node_modules/ },
-          ],
-        },
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        resume: resolve(__dirname, 'projects/resume-stack/index.html'),
+        poker: resolve(__dirname, 'projects/poker/index.html'),
       },
     },
   },

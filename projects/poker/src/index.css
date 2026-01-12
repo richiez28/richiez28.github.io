@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@font-face {
+	font-family: 'Cinzel';
+	src: url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+}
+
+@theme {
+	--color-void: #050505;
+	--color-gold: #C9A55C;
+	--color-gold-dim: #8a6e36;
+	--color-gold-light: #ebd69c;
+	--font-serif: "Cinzel", serif;
+	--font-sans: "Lato", sans-serif;
+	--animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+body {
+	background-color: var(--color-void);
+	color: var(--color-gold);
+	overflow: hidden;
+	margin: 0;
+	font-family: var(--font-sans);
+}
