@@ -1,6 +1,7 @@
 import { Copy, Trash } from 'lucide-react'
 import type { MouseEvent } from 'react'
 import { memo } from 'react'
+import { cn } from '@/lib/utils'
 
 import { Button } from '#ui/button'
 import { BasicInfo } from '#widgets/node/basic-info'
@@ -31,29 +32,54 @@ export function DraggableNode({ item, isActive }: { item: IWidgetNode; isActive:
   function WidgetRenderComponent() {
     switch (item.type) {
       case 'BasicInfo':
-        return <BasicInfo data={item.data.propsData} isLatex={true} />
+        return (
+          <BasicInfo
+            data={item.data.propsData}
+            isLatex={true}
+          />
+        )
       case 'TitleSection':
-        return <TitleSection data={item.data.propsData} isLatex={true} />
+        return (
+          <TitleSection
+            data={item.data.propsData}
+            isLatex={true}
+          />
+        )
       case 'ExperienceTime':
-        return <ExperienceTime data={item.data.propsData} isLatex={true} />
+        return (
+          <ExperienceTime
+            data={item.data.propsData}
+            isLatex={true}
+          />
+        )
       case 'TextContent':
-        return <TextContent data={item.data.propsData} isLatex={true} />
+        return (
+          <TextContent
+            data={item.data.propsData}
+            isLatex={true}
+          />
+        )
 
       case 'Education':
-        return <Education data={item.data.propsData} isLatex={true} />
+        return (
+          <Education
+            data={item.data.propsData}
+            isLatex={true}
+          />
+        )
     }
   }
 
   function OperationButtons() {
-    return isActive ? (
-      <div className="absolute top-1 right-1 flex items-center gap-2 transition-opacity">
+    return (
+      <div className="absolute top-0 -right-10 flex h-full flex-col justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
         <Button
           variant="outline"
           size="icon"
           className="h-7 w-7"
           onMouseDown={handleClickCopy}
         >
-          <Copy />
+          <Copy className="h-3 w-3" />
         </Button>
         <Button
           variant="outline"
@@ -61,10 +87,10 @@ export function DraggableNode({ item, isActive }: { item: IWidgetNode; isActive:
           className="h-7 w-7"
           onMouseDown={handleClickRemove}
         >
-          <Trash />
+          <Trash className="h-3 w-3" />
         </Button>
       </div>
-    ) : null
+    )
   }
 
   return (
@@ -83,7 +109,10 @@ export function DraggableNode({ item, isActive }: { item: IWidgetNode; isActive:
           '--line-height': `${item.data.styleData.lineHeight ?? 1.5}`,
         } as React.CSSProperties
       }
-      className="font-serif"
+      className={cn(
+        'group relative border border-transparent font-serif transition-all hover:border-dashed hover:border-gray-300/50',
+        isActive && 'cursor-default border-dashed border-gray-300',
+      )}
     >
       <WidgetRenderComponent />
       <OperationButtons />

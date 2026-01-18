@@ -22,31 +22,30 @@ export interface ITemplate {
 
 export type IWidgetNode =
   | {
-    type: 'BasicInfo'
-    id: string
-    data: IBasicInfoData
-  }
+      type: 'BasicInfo'
+      id: string
+      data: IBasicInfoData
+    }
   | {
-    type: 'TitleSection'
-    id: string
-    data: ITitleSectionData
-  }
+      type: 'TitleSection'
+      id: string
+      data: ITitleSectionData
+    }
   | {
-    type: 'ExperienceTime'
-    id: string
-    data: IExperienceTimeData
-  }
+      type: 'ExperienceTime'
+      id: string
+      data: IExperienceTimeData
+    }
   | {
-    type: 'TextContent'
-    id: string
-    data: ITextContentData
-  }
-
+      type: 'TextContent'
+      id: string
+      data: ITextContentData
+    }
   | {
-    type: 'Education'
-    id: string
-    data: IEducationData
-  }
+      type: 'Education'
+      id: string
+      data: IEducationData
+    }
 
 export interface IStyleData {
   marginTop: number
@@ -67,6 +66,9 @@ export interface IBasicInfoData {
   propsData: {
     name: string
     linksGroup: [ILinkGroupData, ILinkGroupData, ILinkGroupData]
+    nameFontSize?: number
+    infoFontSize?: number
+    nameBold?: boolean
   }
 }
 export type ILinkGroupData = ILinkData[]
@@ -80,6 +82,7 @@ export interface ITitleSectionData {
   styleData: IStyleData
   propsData: {
     title: string
+    titleBold?: boolean
   }
 }
 
@@ -87,7 +90,14 @@ export interface IExperienceTimeData {
   styleData: IStyleData
   propsData: {
     title: string
-    dateRange: string
+    date: string
+    location?: string
+    titleFontSize?: number
+    dateFontSize?: number
+    locationFontSize?: number
+    titleBold?: boolean
+    dateBold?: boolean
+    locationBold?: boolean
   }
 }
 
@@ -98,10 +108,15 @@ export interface ITextContentData {
     date?: string
     title?: string
     location?: string
+    titleFontSize?: number
+    locationFontSize?: number
+    dateFontSize?: number
+    contentFontSize?: number
+    titleBold?: boolean
+    locationBold?: boolean
+    dateBold?: boolean
   }
 }
-
-
 
 export interface IEducationData {
   styleData: IStyleData
@@ -109,8 +124,19 @@ export interface IEducationData {
     school: string
     degree: string
     location: string
-    dateRange: string
+    date: string
     relevantCourses?: string
+    schoolFontSize?: number
+    degreeFontSize?: number
+    locationFontSize?: number
+    dateFontSize?: number
+    relevantCoursesFontSize?: number
+    schoolBold?: boolean
+    degreeBold?: boolean
+    locationBold?: boolean
+    dateBold?: boolean
+    relevantCoursesLabelBold?: boolean
+    relevantCoursesBold?: boolean
   }
 }
 

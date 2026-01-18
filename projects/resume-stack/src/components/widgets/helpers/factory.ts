@@ -13,9 +13,7 @@ export function createDefaultWidgets(): IWidgetNode[] {
         propsData: {
           name: 'Richie Zhou',
           linksGroup: [
-            [
-              { href: '', content: '(123) 456-7890', icon: 'phone' },
-            ],
+            [{ href: '', content: '(123) 456-7890', icon: 'phone' }],
             [
               { href: 'https://github.com/arunike', content: 'github.com/arunike', icon: 'github' },
               {
@@ -44,7 +42,7 @@ export function createDefaultWidgets(): IWidgetNode[] {
       type: 'TitleSection',
       id: generateWidgetId(),
       data: {
-        propsData: { title: 'Professional Skills' },
+        propsData: { title: 'Education' },
         styleData: {
           marginTop: 20,
           marginBottom: 12,
@@ -59,11 +57,26 @@ export function createDefaultWidgets(): IWidgetNode[] {
       },
     },
     {
-      type: 'TextContent',
+      type: 'Education',
       id: generateWidgetId(),
       data: {
         propsData: {
-          content: '<ul><li><p>Proficient in <code>JavaScript</code>, <code>TypeScript</code>;</p></li><li><p>Experienced with <code>Vue</code>, <code>React</code> frontend development and understanding of core principles;</p></li><li><p>Skilled in using <code>Vite</code>, <code>Webpack</code> and other build tools;</p></li><li><p>Proficient in backend development with <code>NodeJS</code>, <code>MySQL</code>, <code>Redis</code>;</p></li></ul>',
+          school: 'University',
+          degree: 'Bachelor of Science in Computer Science',
+          location: 'San Jose, CA',
+          date: 'Dec. 2025 - Jan. 2026',
+          relevantCourses: 'Data Structures, Algorithms, Artificial Intelligence',
+          schoolFontSize: 16,
+          degreeFontSize: 14,
+          locationFontSize: 12,
+          dateFontSize: 12,
+          relevantCoursesFontSize: 12,
+          schoolBold: true,
+          degreeBold: false,
+          locationBold: false,
+          dateBold: false,
+          relevantCoursesLabelBold: true,
+          relevantCoursesBold: false,
         },
         styleData: {
           marginTop: 0,
@@ -102,7 +115,8 @@ export function createDefaultWidgets(): IWidgetNode[] {
       data: {
         propsData: {
           title: 'Company',
-          dateRange: '2026/01 - 2026/12',
+          location: 'San Jose, CA',
+          date: 'Dec. 2025 - Present',
         },
         styleData: {
           marginTop: 0,
@@ -122,7 +136,8 @@ export function createDefaultWidgets(): IWidgetNode[] {
       id: generateWidgetId(),
       data: {
         propsData: {
-          content: '<ul><li><p>Responsible for the full development process from requirement analysis to frontend architecture design, feature development, and performance optimization.</p></li><li><p>Consistently collaborated with product, design, and backend teams to promote agile development processes and implement CI/CD toolchains, ensuring high-quality delivery.</p></li><li><p>Successfully optimized the payment process page through in-depth research on user experience and frontend performance, improving user conversion and payment success rates.</p></li></ul>',
+          content:
+            '<ul><li><p>Responsible for the full development process from requirement analysis to frontend architecture design, feature development, and performance optimization.</p></li><li><p>Consistently collaborated with product, design, and backend teams to promote agile development processes and implement CI/CD toolchains, ensuring high-quality delivery.</p></li><li><p>Successfully optimized the payment process page through in-depth research on user experience and frontend performance, improving user conversion and payment success rates.</p></li></ul>',
         },
         styleData: {
           marginTop: 0,
@@ -141,7 +156,7 @@ export function createDefaultWidgets(): IWidgetNode[] {
       type: 'TitleSection',
       id: generateWidgetId(),
       data: {
-        propsData: { title: 'Education' },
+        propsData: { title: 'Professional Skills' },
         styleData: {
           marginTop: 20,
           marginBottom: 12,
@@ -156,12 +171,12 @@ export function createDefaultWidgets(): IWidgetNode[] {
       },
     },
     {
-      type: 'ExperienceTime',
+      type: 'TextContent',
       id: generateWidgetId(),
       data: {
         propsData: {
-          title: 'University - Computer Science',
-          dateRange: '2026/01 - 2026/12',
+          content:
+            '<ul><li><p>Proficient in <code>JavaScript</code>, <code>TypeScript</code>;</p></li><li><p>Experienced with <code>Vue</code>, <code>React</code> frontend development and understanding of core principles;</p></li><li><p>Skilled in using <code>Vite</code>, <code>Webpack</code> and other build tools;</p></li><li><p>Proficient in backend development with <code>NodeJS</code>, <code>MySQL</code>, <code>Redis</code>;</p></li></ul>',
         },
         styleData: {
           marginTop: 0,
@@ -254,7 +269,8 @@ export function createWidgetNode(type: WidgetType): IWidgetNode {
         data: {
           propsData: {
             title: 'Company',
-            dateRange: '2026/01 - 2026/12',
+            location: 'San Jose, CA',
+            date: '2026/01 - 2026/12',
           },
           styleData: {
             marginTop: 0,
@@ -275,7 +291,8 @@ export function createWidgetNode(type: WidgetType): IWidgetNode {
         id,
         data: {
           propsData: {
-            content: '<ul><li><p>Responsible for the full development process from requirement analysis to frontend architecture design, feature development, and performance optimization.</p></li><li><p>Consistently collaborated with product, design, and backend teams to promote agile development processes and implement CI/CD toolchains, ensuring high-quality delivery.</p></li><li><p>Successfully optimized the payment process page through in-depth research on user experience and frontend performance, improving user conversion and payment success rates.</p></li></ul>',
+            content:
+              '<ul><li><p>Responsible for the full development process from requirement analysis to frontend architecture design, feature development, and performance optimization.</p></li><li><p>Consistently collaborated with product, design, and backend teams to promote agile development processes and implement CI/CD toolchains, ensuring high-quality delivery.</p></li><li><p>Successfully optimized the payment process page through in-depth research on user experience and frontend performance, improving user conversion and payment success rates.</p></li></ul>',
           },
           styleData: {
             marginTop: 0,

@@ -8,22 +8,31 @@ interface BasicInfoProps {
 }
 
 export function BasicInfo({ data, isLatex }: BasicInfoProps) {
-  const { name, linksGroup } = data
+  const { name, linksGroup, nameFontSize = 24, infoFontSize = 14, nameBold = true } = data
 
   if (isLatex) {
     return (
       <div className="flex flex-col items-center py-2 text-center text-black">
         <h1
-          className="text-[1.875em] font-bold font-serif leading-none tracking-normal"
-          style={{ marginBottom: 'var(--title-spacing, 4px)' }}
+          className={clsx('font-serif leading-none tracking-normal', nameBold && 'font-bold')}
+          style={{
+            marginBottom: 'var(--title-spacing, 4px)',
+            fontSize: `${nameFontSize}pt`,
+          }}
         >
           {name}
         </h1>
 
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[0.875em]">
+        <div
+          className="flex flex-wrap justify-center gap-x-4 gap-y-1"
+          style={{ fontSize: `${infoFontSize}pt` }}
+        >
           <div className="flex items-center gap-2">
             {linksGroup.flat().map((item, index) => (
-              <span key={index} className="flex items-center">
+              <span
+                key={index}
+                className="flex items-center"
+              >
                 {index > 0 && <span className="mr-4 select-none"></span>}
                 <span className="mr-1.5 flex h-3.5 w-3.5 items-center justify-center text-black">
                   {LinkIconComponent(item.icon)}
@@ -51,9 +60,14 @@ export function BasicInfo({ data, isLatex }: BasicInfoProps) {
           className="flex items-end whitespace-nowrap"
           style={{ marginBottom: 'var(--item-spacing, 4px)' }}
         >
-          <span className="mr-3 text-[1.5em] font-semibold">{name}</span>
+          <span
+            className={clsx('mr-3', nameBold && 'font-semibold')}
+            style={{ fontSize: `${nameFontSize}pt` }}
+          >
+            {name}
+          </span>
         </div>
-        <ul>
+        <ul style={{ fontSize: `${infoFontSize}pt` }}>
           {linksGroup.map((links, groupIndex) => (
             <li key={groupIndex}>
               <ul className="flex flex-wrap items-center @3xl:flex-nowrap">

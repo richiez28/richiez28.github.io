@@ -7,7 +7,6 @@ import { WIDGET_CONSTRAINTS } from '#widgets/constraints'
 
 interface StyleFormProps {
   widgetType: WidgetType
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propsData: any
   styleData: IStyleData
   onChange: (styleData: IStyleData) => void
@@ -23,11 +22,19 @@ export function StyleForm({ widgetType, propsData, styleData, onChange }: StyleF
     })
   }
 
-  const hasTitleSpacing = (['Education', 'BasicInfo'].includes(widgetType)) ||
+  const hasTitleSpacing =
+    ['Education', 'BasicInfo'].includes(widgetType) ||
     (['TextContent'].includes(widgetType) && !!propsData?.title)
-  const hasDateSpacing = (['TextContent'].includes(widgetType) && propsData?.date) ||
+  const hasDateSpacing =
+    (['TextContent'].includes(widgetType) && propsData?.date) ||
     (['ExperienceTime', 'Education'].includes(widgetType) && propsData?.dateRange)
 
+  const hasFontSize = !['BasicInfo', 'TextContent', 'ExperienceTime', 'Education'].includes(
+    widgetType,
+  )
+
+  const hasParagraphSpacing = ['TextContent'].includes(widgetType)
+  const hasListSpacing = ['TextContent', 'BasicInfo'].includes(widgetType)
   const hasDividerSpacing = ['TitleSection'].includes(widgetType)
   const hasRelevantCoursesSpacing = widgetType === 'Education' && !!propsData?.relevantCourses
 
@@ -98,69 +105,75 @@ export function StyleForm({ widgetType, propsData, styleData, onChange }: StyleF
           />
         </div>
       </li>
-      <li>
-        <div className="form-label">
-          <span>{t('form.paragraphSpacing')}</span>
-        </div>
-        <div className="flex items-center">
-          <Input
-            className="mr-2 w-32 shrink-0"
-            type="number"
-            min={WIDGET_CONSTRAINTS.style.spacing.min}
-            max={WIDGET_CONSTRAINTS.style.spacing.max}
-            value={styleData.paragraphSpacing}
-            onChange={e => handleChange('paragraphSpacing', Number(e.target.value))}
-          />
-          <Slider
-            min={WIDGET_CONSTRAINTS.style.spacing.min}
-            max={WIDGET_CONSTRAINTS.style.spacing.max}
-            value={[styleData.paragraphSpacing]}
-            onValueChange={value => handleChange('paragraphSpacing', value[0])}
-          />
-        </div>
-      </li>
-      <li>
-        <div className="form-label">
-          <span>{t('form.listSpacing')}</span>
-        </div>
-        <div className="flex items-center">
-          <Input
-            className="mr-2 w-32 shrink-0"
-            type="number"
-            min={WIDGET_CONSTRAINTS.style.spacing.min}
-            max={WIDGET_CONSTRAINTS.style.spacing.max}
-            value={styleData.listSpacing}
-            onChange={e => handleChange('listSpacing', Number(e.target.value))}
-          />
-          <Slider
-            min={WIDGET_CONSTRAINTS.style.spacing.min}
-            max={WIDGET_CONSTRAINTS.style.spacing.max}
-            value={[styleData.listSpacing]}
-            onValueChange={value => handleChange('listSpacing', value[0])}
-          />
-        </div>
-      </li>
-      <li>
-        <div className="form-label">
-          <span>{t('form.fontSize')}</span>
-        </div>
-        <div className="flex items-center">
-          <Input
-            className="mr-2 w-32 shrink-0"
-            type="number"
-            min={WIDGET_CONSTRAINTS.style.fontSize.min}
-            max={WIDGET_CONSTRAINTS.style.fontSize.max}
-            value={styleData.fontSize || 11}
-            onChange={e => handleChange('fontSize', Number(e.target.value))}
-          />
-          <Slider
-            min={WIDGET_CONSTRAINTS.style.fontSize.min}
-            max={WIDGET_CONSTRAINTS.style.fontSize.max}
-            value={[styleData.fontSize || 11]}
-            onValueChange={value => handleChange('fontSize', value[0])}
-          />
-        </div>
-      </li>
+      {hasParagraphSpacing && (
+        <li>
+          <div className="form-label">
+            <span>{t('form.paragraphSpacing')}</span>
+          </div>
+          <div className="flex items-center">
+            <Input
+              className="mr-2 w-32 shrink-0"
+              type="number"
+              min={WIDGET_CONSTRAINTS.style.spacing.min}
+              max={WIDGET_CONSTRAINTS.style.spacing.max}
+              value={styleData.paragraphSpacing}
+              onChange={e => handleChange('paragraphSpacing', Number(e.target.value))}
+            />
+            <Slider
+              min={WIDGET_CONSTRAINTS.style.spacing.min}
+              max={WIDGET_CONSTRAINTS.style.spacing.max}
+              value={[styleData.paragraphSpacing]}
+              onValueChange={value => handleChange('paragraphSpacing', value[0])}
+            />
+          </div>
+        </li>
+      )}
+      {hasListSpacing && (
+        <li>
+          <div className="form-label">
+            <span>{t('form.listSpacing')}</span>
+          </div>
+          <div className="flex items-center">
+            <Input
+              className="mr-2 w-32 shrink-0"
+              type="number"
+              min={WIDGET_CONSTRAINTS.style.spacing.min}
+              max={WIDGET_CONSTRAINTS.style.spacing.max}
+              value={styleData.listSpacing}
+              onChange={e => handleChange('listSpacing', Number(e.target.value))}
+            />
+            <Slider
+              min={WIDGET_CONSTRAINTS.style.spacing.min}
+              max={WIDGET_CONSTRAINTS.style.spacing.max}
+              value={[styleData.listSpacing]}
+              onValueChange={value => handleChange('listSpacing', value[0])}
+            />
+          </div>
+        </li>
+      )}
+      {hasFontSize && (
+        <li>
+          <div className="form-label">
+            <span>{t('form.fontSize')}</span>
+          </div>
+          <div className="flex items-center">
+            <Input
+              className="mr-2 w-32 shrink-0"
+              type="number"
+              min={WIDGET_CONSTRAINTS.style.fontSize.min}
+              max={WIDGET_CONSTRAINTS.style.fontSize.max}
+              value={styleData.fontSize || 11}
+              onChange={e => handleChange('fontSize', Number(e.target.value))}
+            />
+            <Slider
+              min={WIDGET_CONSTRAINTS.style.fontSize.min}
+              max={WIDGET_CONSTRAINTS.style.fontSize.max}
+              value={[styleData.fontSize || 11]}
+              onValueChange={value => handleChange('fontSize', value[0])}
+            />
+          </div>
+        </li>
+      )}
       {hasTitleSpacing && (
         <li>
           <div className="form-label">
@@ -253,6 +266,6 @@ export function StyleForm({ widgetType, propsData, styleData, onChange }: StyleF
           </div>
         </li>
       )}
-    </ul >
+    </ul>
   )
 }

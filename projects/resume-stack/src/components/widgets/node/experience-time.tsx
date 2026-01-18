@@ -1,3 +1,4 @@
+import { clsx } from 'clsx'
 import type { IExperienceTimeData } from '#widgets/types'
 
 interface ExperienceTimeProps {
@@ -6,21 +7,68 @@ interface ExperienceTimeProps {
 }
 
 export function ExperienceTime({ data, isLatex }: ExperienceTimeProps) {
-  const { title, dateRange } = data
+  const {
+    title,
+    date,
+    location,
+    titleFontSize = 16,
+    dateFontSize = 12,
+    locationFontSize = 12,
+  } = data
 
   if (isLatex) {
     return (
-      <div className="flex flex-wrap items-baseline justify-between font-serif text-black">
-        <div className="text-[1.125em] font-bold">{title}</div>
-        <div className="text-[0.875em] italic text-black">{dateRange}</div>
+      <div className="font-serif text-black">
+        <div className="flex flex-wrap items-baseline justify-between">
+          <div
+            className={clsx((data.titleBold ?? true) && 'font-bold')}
+            style={{ fontSize: `${titleFontSize}pt` }}
+          >
+            {title}
+          </div>
+          <div
+            className={clsx('text-black', (data.locationBold ?? false) && 'font-bold')}
+            style={{ fontSize: `${locationFontSize}pt` }}
+          >
+            {location}
+          </div>
+        </div>
+        <div>
+          <div
+            className={clsx('text-black italic', (data.dateBold ?? false) && 'font-bold')}
+            style={{ fontSize: `${dateFontSize}pt` }}
+          >
+            {date}
+          </div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-between py-1">
-      <div className="text-[1em] font-medium">{title}</div>
-      <div className="text-[0.9em] text-zinc-600">{dateRange}</div>
+    <div className="py-1">
+      <div className="flex flex-wrap items-center justify-between">
+        <div
+          className={clsx('font-medium', (data.titleBold ?? true) && 'font-bold')}
+          style={{ fontSize: `${titleFontSize}pt` }}
+        >
+          {title}
+        </div>
+        <div
+          className={clsx('text-zinc-600', (data.locationBold ?? false) && 'font-bold')}
+          style={{ fontSize: `${locationFontSize}pt` }}
+        >
+          {location}
+        </div>
+      </div>
+      <div>
+        <div
+          className={clsx('text-zinc-600', (data.dateBold ?? false) && 'font-bold')}
+          style={{ fontSize: `${dateFontSize}pt` }}
+        >
+          {date}
+        </div>
+      </div>
     </div>
   )
 }
